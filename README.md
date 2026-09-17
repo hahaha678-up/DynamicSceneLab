@@ -1,82 +1,90 @@
 # DynamicSceneLab
 
-**面向室内移动机器人的高保真动态仿真与数据生成系统。**
+面向室内移动机器人的动态仿真与数据生成系统。基于 **3DGS、Isaac Sim 和 Nav2**，支持动态人物场景构建、生成轨迹执行、导航闭环评测与参数化场景扩增。
 
-真实环境中的人物横穿、遮挡出现等动态人机交互场景，难以稳定重复，批量测试与数据采集的成本也较高。DynamicSceneLab 将室内重建场景、动态人物、机器人导航和数据记录组织到同一套仿真流程中，通过配置场景与人物行为，支持重复运行、交互评测和场景变体生成。
-
-## 演示
+## Demo
 
 https://github.com/user-attachments/assets/e236be10-a6e4-4bcd-8dc2-fa759f822936
 
-35 秒 · 1080p：**多人物动态环境 → 遮挡出现与导航响应 → CrowdES 生成轨迹执行 → 同一父场景的三组变体**。
+多人物仿真 · 遮挡交互 · CrowdES 轨迹回放 · 场景变体对比（35 秒，1080p）
 
-## 系统做了什么
+## Features
 
-### 1. Real2Sim 场景构建：让机器人在重建环境中运行
+- **Real2Sim 场景**：3DGS 外观与 Mesh 物理几何结合，统一场景、机器人和传感器坐标，支持碰撞、导航及多视角渲染。
+- **动态人物**：可动画高斯人物与感知 / 碰撞代理同步；支持 HuNav 社会力交互、指定轨迹回放、横穿和遮挡出现。
+- **导航闭环**：LiDAR → ROS2 → Local Costmap → Nav2 → Carter，记录人物运动引起的减速、停车与恢复导航。
+- **数据生成与评测**：支持参数化场景和 CrowdES 生成轨迹，提供轨迹有效性检查、回合记录、TTC / 间隙评测及时间 / 速度变体生成。
 
-基于真实室内场景的重建资产，采用 **3DGS + Mesh 混合表示**：3DGS 表达场景外观，Mesh 提供碰撞、地面支撑和导航所需的几何结构。统一场景、机器人与传感器的尺度和坐标系，将重建场景接入 Isaac Sim，形成机器人可以实际执行运动任务的仿真环境。
-
-场景视觉与物理状态相互对应，支持第三人称和机器人视角的画面生成，为动态交互测试及数据采集提供环境基础。
-
-### 2. 动态人物仿真：让人物运动进入机器人的感知与导航
-
-接入可动画高斯人物，统一管理人物的**世界运动、视觉姿态和感知 / 碰撞代理**。人物移动时，对应的几何代理同步更新，使机器人传感器能够观测到人物及其遮挡关系。
-
-在此基础上构造多人物、Crossing（横穿）和 Occlusion（遮挡出现）等场景。人物行为支持 HuNav 社会力交互和指定轨迹回放，可分别用于观察交互行为和控制测试条件。
-
-已经打通的导航链路为：
+## Architecture
 
 ```text
-人物运动 → 模拟 LiDAR → Local Costmap → Nav2 控制 → Carter 实际运动
-                  ↑                                    │
-                  └──────── 下一时刻传感器观测 ────────────┘
+参数化场景 / CrowdES 轨迹
+          │
+    场景配置与质量检查
+          │
+          ▼
+Isaac Sim ── LiDAR / 状态 ──► ROS2 / Nav2
+    ▲                             │
+    └──────── 控制指令 ─────────────┘
+          │
+          ▼
+回合记录 → EpisodeEvaluator → 交互指标
+          │
+父轨迹 + 时间偏移 / 速度缩放 → 场景变体
 ```
 
-动态人物会引起 Carter 减速、等待或停车，并在冲突缓解后继续导航。系统同步记录传感器、控制指令和实际运动，便于对照分析机器人响应。
+## Quick Start
 
-### 3. 闭环数据生成：把场景配置变成可分析的运行数据
+### 离线评测器
 
-将**参数化事件与 CrowdES 学习式人物轨迹**转换为可执行场景，完成世界坐标、尺度和时间转换。运行前检查人物轨迹的可行走区域、静态障碍间隙及运动连续性；随后执行机器人闭环，并自动保存：
+仅需 Python 标准库：
 
-| 数据 | 内容 |
-|---|---|
-| 场景配置 | 人物来源、初始条件、运动参数及父场景关系 |
-| 传感器观测 | 模拟 LiDAR 与导航输入记录 |
-| 运动与控制 | 人物 / 机器人轨迹、速度及控制指令 |
-| 运行结果 | 导航状态、最小代理间隙、TTC、制动与停车时间 |
+```bash
+git clone https://github.com/hahaha678-up/DynamicSceneLab.git
+cd DynamicSceneLab
+python -B hunav-core/crossing/test_episode_evaluator.py
+```
 
-围绕同一父轨迹，通过 **时间偏移与速度缩放**生成不同交互条件，再次运行并对比结果，形成“场景配置 → 闭环运行 → 数据记录与评测 → 变体回测”的工作流程。
+安装 NumPy、PyYAML 后可运行全部 40 项离线测试：
 
-## 项目价值
+```bash
+python -B -m unittest discover -s hunav-core/crossing -p 'test_*.py' -v
+```
 
-将**重建场景、动态人物、机器人感知导航闭环和自动记录评测**串成一套动态机器人仿真系统，使人机交互场景能够被配置、重复执行、量化分析，并进一步扩展为不同条件的测试样本。
+### Isaac / Nav2 仿真
 
-## 场景变体对比
+按 [运行文档](docs/RUNNING.md) 准备容器、场景和模型资源后，在 Linux 主机运行：
 
-保持人物空间轨迹主体不变，配置三组时间与速度参数，生成不同交互条件。以下三个回合均到达导航目标：
+```bash
+export DEMO_NAME=demo_my_run
+python3 -B hunav-core/demo_suite.py --phase simulate --only occlusion
+python3 -B hunav-core/demo_suite.py --phase render --only occlusion
+```
 
-| 变体 | 时间偏移 | 速度倍率 | 最小代理间隙 |
-|---|---:|---:|---:|
-| 视频 A | +0.8 s | 1.15 | 0.258 m |
-| 视频 B | 0.0 s | 1.00 | 0.158 m |
-| 视频 C | −1.2 s | 0.80 | −0.378 m |
+`--only` 支持 `multi`、`crossing`、`occlusion`、`crowdes`、`variant_a`、`variant_b`、`variant_c`。输出位于 `mobile-navigation/output/<DEMO_NAME>/`。
 
-间隙采用二维圆形代理计算，负值表示代理重叠。配置、视频标签对应关系与实际记录见 [示例数据](examples/README.md) 和 [回合结果](examples/results.json)；指标定义见 [评测说明](hunav-core/crossing/EPISODE_EVALUATOR.md)。
+## Repository
 
-## 代码与运行
+```text
+mobile-navigation/             场景几何、坐标配置与 Carter
+  crowdes-b/                   CrowdES 推理与轨迹检查
+hunav-core/
+  crossing/                    场景执行、ROS2 / Nav2、评测与渲染
+lhm-human/                     动态高斯人物与步态
+examples/
+  scenarios/                   场景配置
+  trajectories/                示例人物轨迹
+  results.json                 实际回合结果
+docs/                          环境与运行说明
+```
 
-| 模块 | 主要内容 |
-|---|---|
-| [场景与机器人](mobile-navigation/) | 场景几何、坐标配置、Carter 和高斯渲染 |
-| [CrowdES 场景生成](mobile-navigation/crowdes-b/) | 房间输入、预训练推理、轨迹筛选与转换 |
-| [导航执行与评测](hunav-core/crossing/) | 场景规则、Isaac Runner、ROS2 / Nav2、统一评测器 |
-| [动态人物](lhm-human/) | 人体高斯、步态准备与场景合成 |
-| [场景示例](examples/) | 生成轨迹、场景配置与演示回合结果 |
+## Documentation
 
-**40 项离线测试已通过**，覆盖事件配置、遮挡几何、TTC、间隙计算、数据质量及回合终止逻辑。
+- [环境配置与完整运行流程](docs/RUNNING.md)
+- [场景示例与参数化变体](examples/README.md)
+- [评测指标与数据格式](hunav-core/crossing/EPISODE_EVALUATOR.md)
+- [演示回合结果](examples/results.json)
 
-[运行与资源准备](docs/RUNNING.md) · [指标与数据契约](hunav-core/crossing/EPISODE_EVALUATOR.md) · [示例与变体定义](examples/README.md)
-
-## 致谢
+## Acknowledgements
 
 感谢相关开源项目与社区的支持。详见[参考资料](THIRD_PARTY.md)。
