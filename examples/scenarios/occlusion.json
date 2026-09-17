@@ -1,0 +1,42 @@
+{
+  "scenario_id": "occlusion",
+  "source": "parameterized",
+  "event_type": "occlusion",
+  "seed": 0,
+  "max_seconds": 45,
+  "carter": {
+    "route": [
+      [
+        1.8,
+        8.5
+      ],
+      [
+        1.8,
+        15.5
+      ]
+    ],
+    "speed": 0.8
+  },
+  "tracks": [
+    {
+      "points": [
+        [
+          2.6,
+          4.7,
+          13.3
+        ],
+        [
+          7.0,
+          0.0,
+          12.7
+        ]
+      ]
+    }
+  ],
+  "motion_mode": "trajectory_replay",
+  "controller_mode": "nav2",
+  "proxy": {
+    "carter_radius_m": 0.55,
+    "person_radius_m": 0.23
+  }
+}

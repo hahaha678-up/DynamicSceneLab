@@ -1,0 +1,15 @@
+schema_version: 1
+event:
+  type: crossing
+  conflict_point: [1.3, 13.8]
+  crossing_angle_deg: 90
+  arrival_gap: 0.0
+carter:
+  path: main_corridor
+  speed: 0.8
+person:
+  direction: left_to_right
+  speed: 1.2
+  pre_conflict_distance: 2.0
+  post_conflict_distance: 2.5
+max_seconds: 35

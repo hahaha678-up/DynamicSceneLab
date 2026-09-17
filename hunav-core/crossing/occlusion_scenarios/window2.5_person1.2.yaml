@@ -1,0 +1,14 @@
+schema_version: 1
+event:
+  type: occlusion
+  conflict_point: [2.75, 12.85]
+  reaction_window: 2.5
+occluder:
+  region: pillar_corner_01
+carter:
+  path: pillar_corridor
+  speed: 0.8
+person:
+  direction: hidden_to_corridor
+  speed: 1.2
+max_seconds: 35

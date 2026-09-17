@@ -1,0 +1,194 @@
+{
+  "description": "Selected recorded episodes; not a benchmark or physical-contact ground truth",
+  "episodes": [
+    {
+      "scenario_id": "multi",
+      "source": "parameterized",
+      "variant_parameters": null,
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 0.9773897978601911,
+        "min_clearance_m": 0.19738979786019106,
+        "closest_time_s": 11.982948912174946,
+        "min_ttc_s": 0.8381403176294578,
+        "min_ttc_time_s": 10.500000547617674,
+        "min_speed_during_interaction_mps": 0.11526041599339559,
+        "max_deceleration_mps2": 5.13551938715466,
+        "stop_duration_s": 0.0,
+        "braking_duration_s": 0.6000000312924385,
+        "time_to_goal_s": 16.266667515039444,
+        "path_length_m": 10.012170659644854,
+        "episode_duration_s": 18.000000938773155,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": null
+    },
+    {
+      "scenario_id": "occlusion",
+      "source": "parameterized",
+      "variant_parameters": null,
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 0.8513353177346279,
+        "min_clearance_m": 0.07133531773462787,
+        "closest_time_s": 5.413295705998801,
+        "min_ttc_s": 0.5015139232022204,
+        "min_ttc_time_s": 4.466666899621487,
+        "min_speed_during_interaction_mps": 0.0010868141867921095,
+        "max_deceleration_mps2": 5.242372339653185,
+        "stop_duration_s": 0.388044251893075,
+        "braking_duration_s": 1.0000000521540642,
+        "time_to_goal_s": 12.100000631064177,
+        "path_length_m": 6.915087401316102,
+        "episode_duration_s": 12.100000631064177,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": null
+    },
+    {
+      "scenario_id": "crowdes",
+      "source": "crowdes",
+      "variant_parameters": null,
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 1.0107341372089436,
+        "min_clearance_m": 0.23073413720894353,
+        "closest_time_s": 12.595973479308775,
+        "min_ttc_s": 2.9632842728165265,
+        "min_ttc_time_s": 8.366667103022337,
+        "min_speed_during_interaction_mps": 0.6993084650956132,
+        "max_deceleration_mps2": 1.2528809964908902,
+        "stop_duration_s": 0.0,
+        "braking_duration_s": 0.20000001043081284,
+        "time_to_goal_s": 14.600000761449337,
+        "path_length_m": 9.895612964627075,
+        "episode_duration_s": 35.000001825392246,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": null
+    },
+    {
+      "scenario_id": "variant_a",
+      "source": "augmented",
+      "variant_parameters": {
+        "time_shift_s": -1.2,
+        "speed_scale": 0.8
+      },
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 0.40186127348194267,
+        "min_clearance_m": -0.37813872651805736,
+        "closest_time_s": 12.777478452957416,
+        "min_ttc_s": 0.0,
+        "min_ttc_time_s": 12.100000631064177,
+        "min_speed_during_interaction_mps": 0.0534305405015257,
+        "max_deceleration_mps2": 5.158198934913269,
+        "stop_duration_s": 0.0,
+        "braking_duration_s": 1.6000000834465027,
+        "time_to_goal_s": 23.100001204758883,
+        "path_length_m": 11.544661682739779,
+        "episode_duration_s": 23.100001204758883,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": "manual demo parameters"
+    },
+    {
+      "scenario_id": "variant_b",
+      "source": "augmented",
+      "variant_parameters": {
+        "time_shift_s": 0.0,
+        "speed_scale": 1.0
+      },
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 0.9375192343731104,
+        "min_clearance_m": 0.15751923437311033,
+        "closest_time_s": 11.979024916264647,
+        "min_ttc_s": 0.47187349365457987,
+        "min_ttc_time_s": 10.800000563263893,
+        "min_speed_during_interaction_mps": 0.14084331267469183,
+        "max_deceleration_mps2": 5.06352244884516,
+        "stop_duration_s": 0.0,
+        "braking_duration_s": 0.5000000260770321,
+        "time_to_goal_s": 15.366667468100786,
+        "path_length_m": 9.911251527658829,
+        "episode_duration_s": 18.000000938773155,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": "manual demo parameters"
+    },
+    {
+      "scenario_id": "variant_c",
+      "source": "augmented",
+      "variant_parameters": {
+        "time_shift_s": 0.8,
+        "speed_scale": 1.15
+      },
+      "navigation_result": "GOAL_REACHED",
+      "quality_valid": true,
+      "metrics": {
+        "min_center_distance_m": 1.0376958197447015,
+        "min_clearance_m": 0.25769581974470146,
+        "closest_time_s": 11.53333393484354,
+        "min_ttc_s": null,
+        "min_ttc_time_s": null,
+        "min_speed_during_interaction_mps": 0.7123927867954405,
+        "max_deceleration_mps2": 1.292961397126114,
+        "stop_duration_s": 0.0,
+        "braking_duration_s": 0.06666667014360428,
+        "time_to_goal_s": 14.63333409652114,
+        "path_length_m": 9.89661024364568,
+        "episode_duration_s": 18.000000938773155,
+        "first_detection_time_s": null,
+        "reaction_latency_s": null
+      },
+      "threshold_version": "proxy_clearance_025m_v1",
+      "physical_contact": {
+        "person_carter": null,
+        "carter_environment": null,
+        "person_environment": null
+      },
+      "parameter_selection": "manual demo parameters"
+    }
+  ]
+}

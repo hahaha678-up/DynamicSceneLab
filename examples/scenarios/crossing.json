@@ -1,0 +1,32 @@
+{
+  "scenario_id": "crossing",
+  "source": "parameterized",
+  "event_type": "crossing",
+  "seed": 0,
+  "max_seconds": 45,
+  "carter": {
+    "route": [
+      [
+        1.3,
+        5.0
+      ],
+      [
+        1.3,
+        15.0
+      ]
+    ],
+    "speed": 0.8
+  },
+  "tracks": [
+    {
+      "csv": "/repo/examples/trajectories/crossing_reference.csv"
+    }
+  ],
+  "minimum_seconds": 18.0,
+  "motion_mode": "trajectory_replay",
+  "controller_mode": "nav2",
+  "proxy": {
+    "carter_radius_m": 0.55,
+    "person_radius_m": 0.23
+  }
+}

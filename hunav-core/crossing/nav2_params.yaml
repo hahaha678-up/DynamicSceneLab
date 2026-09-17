@@ -1,0 +1,95 @@
+controller_server:
+  ros__parameters:
+    use_sim_time: true
+    controller_frequency: 15.0
+    odom_topic: /odom
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.001
+    failure_tolerance: 5.0
+    progress_checker_plugin: progress_checker
+    goal_checker_plugins: [goal_checker]
+    controller_plugins: [FollowPath]
+    progress_checker:
+      plugin: nav2_controller::SimpleProgressChecker
+      required_movement_radius: 0.2
+      movement_time_allowance: 15.0
+    goal_checker:
+      plugin: nav2_controller::SimpleGoalChecker
+      xy_goal_tolerance: 0.12
+      yaw_goal_tolerance: 0.15
+      stateful: true
+    FollowPath:
+      plugin: dwb_core::DWBLocalPlanner
+      min_vel_x: 0.0
+      min_vel_y: 0.0
+      max_vel_x: 0.8
+      max_vel_y: 0.0
+      max_vel_theta: 0.6
+      min_speed_xy: 0.0
+      max_speed_xy: 0.8
+      min_speed_theta: 0.0
+      acc_lim_x: 1.2
+      acc_lim_y: 0.0
+      acc_lim_theta: 1.0
+      decel_lim_x: -1.8
+      decel_lim_y: 0.0
+      decel_lim_theta: -1.0
+      vx_samples: 20
+      vy_samples: 1
+      vtheta_samples: 21
+      sim_time: 1.5
+      linear_granularity: 0.04
+      angular_granularity: 0.04
+      transform_tolerance: 0.2
+      trans_stopped_velocity: 0.03
+      xy_goal_tolerance: 0.12
+      short_circuit_trajectory_evaluation: true
+      critics: [RotateToGoal, Oscillation, ObstacleFootprint, GoalAlign, PathAlign, PathDist, GoalDist]
+      ObstacleFootprint.scale: 0.1
+      PathAlign.scale: 32.0
+      PathAlign.forward_point_distance: 0.2
+      GoalAlign.scale: 24.0
+      GoalAlign.forward_point_distance: 0.2
+      PathDist.scale: 32.0
+      GoalDist.scale: 24.0
+      RotateToGoal.scale: 32.0
+      RotateToGoal.slowing_factor: 5.0
+      RotateToGoal.lookahead_time: -1.0
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      use_sim_time: true
+      global_frame: odom
+      robot_base_frame: base_link
+      rolling_window: true
+      width: 8
+      height: 8
+      resolution: 0.05
+      update_frequency: 15.0
+      publish_frequency: 10.0
+      footprint: '[[0.37, 0.0], [0.3053, 0.32528], [0.12104, 0.60104], [-0.15472, 0.7853], [-0.48, 0.85], [-0.80528, 0.7853], [-1.08104, 0.60104], [-1.2653, 0.32528], [-1.33, 0.0], [-1.2653, -0.32528], [-1.08104, -0.60104], [-0.80528, -0.7853], [-0.48, -0.85], [-0.15472, -0.7853], [0.12104, -0.60104], [0.3053, -0.32528]]'
+      footprint_padding: 0.0
+      transform_tolerance: 0.2
+      track_unknown_space: false
+      always_send_full_costmap: true
+      plugins: [obstacle_layer, inflation_layer]
+      obstacle_layer:
+        plugin: nav2_costmap_2d::ObstacleLayer
+        enabled: true
+        observation_sources: scan
+        scan:
+          topic: /scan
+          data_type: LaserScan
+          marking: true
+          clearing: true
+          inf_is_valid: true
+          obstacle_max_range: 5.0
+          raytrace_max_range: 6.0
+          obstacle_min_range: 0.1
+          raytrace_min_range: 0.1
+          max_obstacle_height: 2.0
+      inflation_layer:
+        plugin: nav2_costmap_2d::InflationLayer
+        inflation_radius: 1.0
+        cost_scaling_factor: 4.0

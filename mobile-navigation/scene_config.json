@@ -1,0 +1,96 @@
+{
+  "scene": "Habitat-GS scene55",
+  "gs_asset": "assets/scene55/scene55.gs.ply",
+  "gs_to_world": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.1801194303101908
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "floor_gs_y": -0.1801194303101908,
+  "resolution_m": 0.05,
+  "clearance_m": 0.9,
+  "navigation_center_offset": [
+    -0.48,
+    0.0
+  ],
+  "route": [
+    [
+      1.3,
+      5.0
+    ],
+    [
+      1.3,
+      15.0
+    ]
+  ],
+  "start": [
+    1.3,
+    5.0
+  ],
+  "goal": [
+    1.3,
+    15.0
+  ],
+  "mesh_vertices": 123298,
+  "mesh_faces": 196174,
+  "navigation_area_m2": 418.68000000000006,
+  "safe_area_m2": 124.63250000000002,
+  "human": {
+    "start": [
+      5.0,
+      10.0
+    ],
+    "goal": [
+      0.0,
+      10.0
+    ],
+    "yaw": 3.141592653589793,
+    "speed": 1.5205219696308003,
+    "radius": 0.23,
+    "social_force_factor": 10.0
+  },
+  "human_start_delay": 6.8,
+  "routes": {
+    "cross": [
+      [
+        1.3,
+        5.0
+      ],
+      [
+        1.3,
+        15.0
+      ]
+    ]
+  },
+  "overview_eye": [
+    0.3,
+    2.5,
+    2.3
+  ],
+  "overview_target": [
+    1.3,
+    12.0,
+    1.0
+  ]
+}

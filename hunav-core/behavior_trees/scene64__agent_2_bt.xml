@@ -1,0 +1,5 @@
+<root BTCPP_format="4" main_tree_to_execute="RegularNavTree">
+  <BehaviorTree ID="RegularNavTree">
+    <RegularNav agent_id="{id}" time_step="{dt}"/>
+  </BehaviorTree>
+</root>

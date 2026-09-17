@@ -1,0 +1,17 @@
+{
+  "config_version": "crossing_evaluator_v1",
+  "threshold_version": "proxy_clearance_025m_v1",
+  "target_clearance_m": 0.25,
+  "ttc_horizon_s": 10.0,
+  "legacy_carter_radius_m": 0.55,
+  "legacy_person_radius_m": 0.23,
+  "interaction_center_distance_m": 3.0,
+  "goal_approach_exclusion_m": 1.0,
+  "movement_threshold_mps": 0.05,
+  "stop_threshold_mps": 0.03,
+  "deceleration_threshold_mps2": 0.2,
+  "minimum_stop_duration_s": 0.2,
+  "unknown_cadence_max_gap_s": 0.2,
+  "timestamp_tolerance_s": 0.00001,
+  "note": "Project experiment thresholds, not a safety standard. Freeze this file for each comparison."
+}
