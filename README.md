@@ -70,6 +70,6 @@ https://github.com/user-attachments/assets/e236be10-a6e4-4bcd-8dc2-fa759f822936
 
 [运行与资源准备](docs/RUNNING.md) · [指标与数据契约](hunav-core/crossing/EPISODE_EVALUATOR.md) · [示例与变体定义](examples/README.md)
 
-## 参考与致谢
+## 致谢
 
-感谢 [Re3Sim](https://github.com/InternRobotics/Re3Sim)、[CrowdES](https://github.com/InhwanBae/Crowd-Behavior-Generation)、[HuNavSim](https://github.com/robotics-upo/hunav_sim)、[LHM](https://github.com/aigc3d/LHM)、[Nav2](https://github.com/ros-navigation/navigation2) 与 [Habitat-GS](https://huggingface.co/datasets/RukawaY/gs_scenes) 等开源项目及资源为本项目提供支持。相关来源与许可见 [第三方资源说明](THIRD_PARTY.md)。
+感谢相关开源项目与社区的支持。详见[参考资料](THIRD_PARTY.md)。
