@@ -79,6 +79,6 @@ python -B -m unittest discover -s hunav-core/crossing -p 'test_*.py' -v
 - 已实现参数化扩增；尚未实现 CEM 风险反馈搜索，也未证明大规模长尾发现效率。
 - 首次检测时间、反应延迟与缺失的物理接触记录保持为空，不以推测补齐。
 
-## 致谢
+## 参考与致谢
 
-本项目基于 [Re3Sim](https://github.com/InternRobotics/Re3Sim)、[CrowdES](https://github.com/InhwanBae/Crowd-Behavior-Generation)、[HuNavSim](https://github.com/robotics-upo/hunav_sim)、[LHM](https://github.com/aigc3d/LHM)、[Nav2](https://github.com/ros-navigation/navigation2) 与 [Habitat-GS 场景资源](https://huggingface.co/datasets/RukawaY/gs_scenes)。项目工作集中于场景适配、模块集成、数据接口、评测和演示验证；第三方模型与算法归原作者所有。详见 [第三方资源说明](THIRD_PARTY.md)。
+感谢 [Re3Sim](https://github.com/InternRobotics/Re3Sim)、[CrowdES](https://github.com/InhwanBae/Crowd-Behavior-Generation)、[HuNavSim](https://github.com/robotics-upo/hunav_sim)、[LHM](https://github.com/aigc3d/LHM)、[Nav2](https://github.com/ros-navigation/navigation2) 与 [Habitat-GS](https://huggingface.co/datasets/RukawaY/gs_scenes) 等开源项目及资源为本项目提供支持。相关来源与许可见 [第三方资源说明](THIRD_PARTY.md)。
