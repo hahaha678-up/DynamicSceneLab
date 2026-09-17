@@ -17,9 +17,21 @@ https://github.com/user-attachments/assets/e236be10-a6e4-4bcd-8dc2-fa759f822936
 
 ## Architecture
 
-![DynamicSceneLab architecture](docs/diagrams/architecture.png)
-
-[Editable draw.io source](docs/diagrams/architecture.drawio)
+```text
+参数化场景 / CrowdES 轨迹
+          │
+    场景配置与质量检查
+          │
+          ▼
+Isaac Sim ── LiDAR / 状态 ──► ROS2 / Nav2
+    ▲                             │
+    └──────── 控制指令 ─────────────┘
+          │
+          ▼
+回合记录 → EpisodeEvaluator → 交互指标
+          │
+父轨迹 + 时间偏移 / 速度缩放 → 场景变体
+```
 
 ## Quick Start
 
